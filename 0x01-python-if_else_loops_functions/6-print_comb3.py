@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-for x in range(0, 10):
-    for y in range(x + 1, 10):
-        if x == 8 and y == 9:
-            print('89')
-        else:
-            print('{}{}, '.format(x, y), end='')
+for a in range(0, 9):
+    for b in range(1 + a, 10):
+        print("{:d}{:d}".format(a, b), end="")
+        if (a + b) is not 17:
+            print(",", end=" ")
+print()

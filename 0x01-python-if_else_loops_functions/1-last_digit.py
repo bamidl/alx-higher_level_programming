@@ -1,15 +1,19 @@
 #!/usr/bin/python3
 import random
 number = random.randint(-10000, 10000)
-if number < 0:
-    lastdigit = number % -10
+greater = "and is greater than 5"
+lesser = "and is less than 6 and not 0"
+equal = "and is 0"
+
+if number > 0:
+    last = number % 10
 else:
-    lastdigit = number % 10
-if lastdigit > 5:
-    print("Last digit of {:d} is {:d} and is greater than \
-5".format(number, lastdigit))
-elif lastdigit < 6 and lastdigit != 0:
-    print("Last digit of {:d} is {:d} and is less than 6 \
-and not 0".format(number, lastdigit))
-else:
-    print("Last digit of {:d} is 0 and is 0".format(number))
+    last = ((number * -1) % 10) * -1
+
+if last > 5:
+    final = greater
+elif last is 0:
+    final = equal
+elif last < 6 and not 0:
+    final = lesser
+print("Last digit of", number, "is", last, final)
