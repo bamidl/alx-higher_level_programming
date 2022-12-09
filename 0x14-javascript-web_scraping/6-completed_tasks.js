@@ -1,20 +1,22 @@
 #!/usr/bin/node
 const request = require('request');
-const url = process.argv[2];
-request(url, function (error, response, body) {
-  if (error) { console.log(error); }
-  let ob = {};
-  body = JSON.parse(body);
-  for (let i = 0; i < body.length; i++) {
-    let id = body[i].userId;
-    let completed = body[i].completed;
-    if (completed) {
-      if (!ob[id]) {
-        ob[body[i].userId] = 1;
-      } else {
-        ob[body[i].userId] += 1;
-      }
+
+const requestURL = process.argv[2];
+const users = {};
+
+request(requestURL, function (err, response, body) {
+  if (err) {
+    return console.log(err);
+  }
+
+  const pBody = JSON.parse(body);
+
+  for (let i = 0; i < pBody.length; i++) {
+    const tmp = pBody[i].userId;
+    if (pBody[i].completed) {
+      users[tmp] = (users[tmp] || 0) + 1;
     }
   }
-  console.log(ob);
+
+  console.log(users);
 });

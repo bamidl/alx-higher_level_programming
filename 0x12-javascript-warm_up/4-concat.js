@@ -1,4 +1,5 @@
 #!/usr/bin/node
-// script that prints two arguments passed to it
-const a = process.argv;
-console.log(a[2] + ' is ' + a[3]);
+
+// Script that prints "JavaScript is amazing".
+
+console.log(process.argv[2] + ' is ' + process.argv[3]);

@@ -1,7 +1,11 @@
 #!/usr/bin/node
-// converts a number from base 10 to another base passed as argument
+
+// script that converts a number to a certain base
+
 exports.converter = function (base) {
-  return function (y) {
-    return y.toString(base);
-  };
+  function newBase (number) {
+    return number.toString(base);
+  }
+
+  return newBase;
 };

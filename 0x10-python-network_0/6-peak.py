@@ -1,24 +1,33 @@
 #!/usr/bin/python3
 """
-Peak Module
+    Function: find_peak(listint)
 """
 
 
-def divide(array, low, high):
-    """divide and conquer"""
+def find_peak(listint):
+    """
+        finds a peak in a list of unsorted integers
+        Args:
+            listint (list)
+        Return:
+            peak
+    """
+    listint = listint.copy()
 
-    mid = int((high + low)/2)
-    if array[mid-1] <= array[mid] >= array[mid+1]:
-        return array[mid]
-    elif array[mid] > array[mid+1]:
-        return divide(array, low, mid-1)
-    elif array[mid] < array[mid+1]:
-        return divide(array, mid+1, high)
+    length = len(listint)
 
+    if length == 0:
+        return
 
-def find_peak(list_of_integers):
-    """Find peak of a list"""
+    # find index of element in middle
+    mid = int(length/2)
 
-    if not list_of_integers:
-        return None
-    return divide(list_of_integers, 0, len(list_of_integers)-1)
+    # compare mid index element with neighbours if they exist
+    if (mid == 0 or listint[mid - 1] <= listint[mid]) and (mid == length - 1
+                                                           or listint[mid + 1]
+                                                           < listint[mid]):
+        return listint[mid]
+    elif mid > 0 and listint[mid - 1] > listint[mid]:
+        return find_peak(listint[:mid])
+    else:
+        return find_peak(listint[mid:])

@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 """
-script to fetch header
+    A script that sends a request to the URL and displays the
+    value of the X-Request-Id found in the response
 """
 
+import sys
+import urllib.request
 
-if __name__ == '__main__':
-    from urllib.request import Request, urlopen
-    from sys import argv
 
-    req = Request(argv[1])
-    with urlopen(req) as res:
-        header = res.info()
-        print(header['X-Request-Id'])
+if __name__ == "__main__":
+    with urllib.request.urlopen(sys.argv[1]) as resp:
+        print('{}'.format(resp.info().get('X-Request-id')))

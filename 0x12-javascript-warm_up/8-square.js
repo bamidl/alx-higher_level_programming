@@ -1,14 +1,17 @@
 #!/usr/bin/node
-// script that prints a square
-const size = parseInt(process.argv[2]);
-if (!size) {
+
+// Script to print square of size argv[2].
+
+const myArg = process.argv[2];
+let rows = 'X';
+
+if (isNaN(Number(myArg))) {
   console.log('Missing size');
-}
-let str = '';
-for (let i = 0; i < size; i++) {
-  for (let j = 0; j < size; j++) {
-    str += 'X';
+} else {
+  for (let i = 0; i < myArg - 1; i++) {
+    rows += 'X';
   }
-  console.log(str);
-  str = '';
+  for (let j = 0; j < myArg; j++) {
+    console.log(rows);
+  }
 }

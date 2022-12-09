@@ -1,10 +1,9 @@
 #!/usr/bin/python3
+# 9-print_last_digit.py
+# Gedeon Obae Gekonge <gideonobae@gmail.com>
+
+
 def print_last_digit(number):
-    if number < 0:
-        final = ((number * -1) % 10)
-    elif number > 0:
-        final = number % 10
-    else:
-        final = number
-    print("{:d}".format(final), end="")
-    return final
+    """Print the last digit of a number and return it."""
+    print(abs(number) % 10, end="")
+    return (abs(number) % 10)

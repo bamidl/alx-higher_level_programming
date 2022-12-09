@@ -1,5 +1,7 @@
 #!/usr/bin/node
-// define class Rectangle version 3
+
+// script that creates a class.
+
 module.exports = class Rectangle {
   constructor (w, h) {
     if (w > 0 && h > 0) {
@@ -9,13 +11,17 @@ module.exports = class Rectangle {
   }
 
   print () {
+    let rows = 'X';
+    for (let i = 0; i < this.width - 1; i++) {
+      rows += 'X';
+    }
     for (let j = 0; j < this.height; j++) {
-      console.log(Array(this.width + 1).join('X'));
+      console.log(rows);
     }
   }
 
   rotate () {
-    let temp = this.width;
+    const temp = this.width;
     this.width = this.height;
     this.height = temp;
   }

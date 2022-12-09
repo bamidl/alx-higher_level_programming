@@ -1,105 +1,143 @@
 #!/usr/bin/python3
 """
-Class Module
+    contains a class Base.
 """
 import json
+import csv
 
 
 class Base:
-    """ base class
-    Attributes:
-        _nb_objects: number of objects created
-        id: id of object
     """
+        base class for the entire project.
+        Attributes:
+            __nb_ojects (int)
+            id (int)
+        Methods:
+            __init__()
+    """
+
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """initiation method
-        args:
-            id: id of object
         """
-        if id is not None:
-            self.id = id
-        else:
+           Initializes the class attributes.
+           Args:
+               id (int)
+        """
+        if id is None:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
-
-    def integer_validator(self, name, value):
-        """check if value is an integer"""
-        if type(value) is not int:
-            raise TypeError('{} must be an integer'.format(name))
-        if value <= 0:
-            raise ValueError('{} must be > 0'.format(name))
-
-    def integer_validator2(self, name, value):
-        """check if value is an integer"""
-        if type(value) is not int:
-            raise TypeError('{} must be an integer'.format(name))
-        if value < 0:
-            raise ValueError('{} must be >= 0'.format(name))
+        else:
+            self.id = id
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """returns JSON string
-        args:
-            list_dictionaries: list of dictionaries
-        return:
-            return serialized list or empty list
         """
-        return json.dumps(list_dictionaries or [])
+            returns JSON string repr of list_dictionaries
+        """
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        return json.dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
-        """json to string static method
-        args:
-            json_string: json object string type
-        return:
-            list of json strings
         """
-        if json_string:
-            return json.loads(json_string)
-        return []
+            returns the list of the JSON string representation
+        """
+        if json_string is None or len(json_string) == 0:
+            return []
+        return json.loads(json_string)
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """writes JSON string to a file
-        args:
-            list_objs: list of objects
-        return:
-            na
         """
-        if list_objs:
-            j = cls.to_json_string([obj.to_dictionary() for obj in list_objs])
-        else:
-            j = '[]'
-        with open(cls.__name__ + '.json', 'w') as f:
-            f.write(j)
+            writes the JSON strin representation of list_objs to a file
+        """
+        fname = cls.__name__ + ".json"
+        content = []
+
+        if list_objs is not None:
+            for obj in list_objs:
+                obj = obj.to_dictionary()
+                json_dict = json.loads(cls.to_json_string(obj))
+                content.append(json_dict)
+
+        with open(fname, "w") as jfile:
+            json.dump(content, jfile)
 
     @classmethod
     def create(cls, **dictionary):
-        """return instance with all attributes set
-        args:
-            dictionary: double pointer
-        return:
-            instance with set attribute
         """
+            returns an instance with all attributes already set.
+        """
+        from models.rectangle import Rectangle
+        from models.square import Square
+
         if cls.__name__ == "Rectangle":
-            dummy = cls(1, 1)
-        if cls.__name__ == "Square":
-            dummy = cls(1)
-        dummy.update(**dictionary)
-        return dummy
+            mod = Rectangle(2, 7)
+        elif cls.__name__ == "Square":
+            mod = Square(6)
+        mod.update(**dictionary)
+        return (mod)
 
     @classmethod
     def load_from_file(cls):
-        '''Returns a list of instances
-        return:
-            list of instance json string
-        '''
+        """
+            returns a list of instances
+        """
+        fname = cls.__name__ + ".json"
+
         try:
-            filename = cls.__name__ + '.json'
-            with open(filename, mode='r') as f:
-                d = cls.from_json_string(f.read())
-            return [cls.create(**x) for x in d]
-        except FileNotFoundError:
+            with open(fname, encoding='utf8') as jfile:
+                content = cls.from_json_string(jfile.read())
+        except:
             return []
+
+        instances = []
+
+        for instance in content:
+            temp = cls.create(**instance)
+            instances.append(temp)
+
+        return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+            serializes in CSV and saves in a file
+        """
+        fname = cls.__name__ + ".csv"
+
+        if list_objs is None:
+            with open(fname, "w") as cfile:
+                cfile.write("[]")
+        else:
+            with open(fname, "w") as cfile:
+                writer = csv.writer(cfile)
+                for obj in list_objs:
+                    if cls.__name__ == "Rectangle":
+                        writer.writerow([obj.id, obj.width, obj.height, obj.x, obj.y])
+                    if cls.__name__ == "Square":
+                        writer.writerow([obj.id, obj.width, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+            deserializes from CSV from a file.
+        """
+        fname = cls.__name__ + ".csv"
+
+        with open(fname, "r") as cfile:
+            if cls.__name__ == "Rectangle":
+               reader = csv.DictReader(cfile, fieldnames={'id','width',
+                                                          'height', 'x', 'y'})
+            elif cls.__name__ == "Square":
+               reader = csv.DictReader(cfile, fieldnames={'id', 'size', 'x', 'y'})
+
+            instances = []
+            for instance in reader:
+                instance = {x: int(y) for x, y in instance.items()}
+                temp = cls.create(**instance)
+                instances.append(temp)
+
+        return instances

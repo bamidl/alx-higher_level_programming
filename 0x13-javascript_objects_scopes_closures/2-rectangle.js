@@ -1,5 +1,7 @@
 #!/usr/bin/node
-// define class Rectangle version 2
+
+// script that creates a class.
+
 module.exports = class Rectangle {
   constructor (w, h) {
     if (w > 0 && h > 0) {

@@ -1,8 +1,9 @@
--- List all shows and all genres linked to a show
-SELECT a.title, c.name
-FROM tv_shows AS a
-LEFT JOIN tv_show_genres AS b
-ON a.id = b.show_id
-LEFT JOIN tv_genres AS c
-ON b.genre_id = c.id
-ORDER BY a.title ASC, c.name ASC;
+-- lists all genres the show dexter is listed under
+SELECT tv_shows.title, tv_genres.name 
+       FROM tv_shows
+       LEFT OUTER JOIN tv_show_genres
+       ON tv_shows.id = tv_show_genres.show_id
+       	  LEFT OUTER JOIN tv_genres
+	  ON tv_show_genres.genre_id = tv_genres.id
+       ORDER BY tv_shows.title, tv_genres.name;
+

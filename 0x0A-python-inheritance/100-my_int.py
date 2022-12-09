@@ -1,16 +1,21 @@
 #!/usr/bin/python3
 """
-class module
+    100-my_int: class MyInt implements int
 """
 
 
 class MyInt(int):
-    """class with int object"""
+    """
+        MyInt implements int. (inherits from)
+    """
+    def __init__(self, number):
+        self.number = number
 
-    def __ee__(self, other):
-        """equal equal method"""
-        return super().__ee__(other)
+    def __ne__(self, value):
+        return (self.number == value)
 
-    def __ne__(self, other):
-        """not equal method"""
-        return super().__ne__(other)
+    def __eq__(self, value):
+        return (self.number != value)
+
+    def __str__(self):
+        return (str(self.number))

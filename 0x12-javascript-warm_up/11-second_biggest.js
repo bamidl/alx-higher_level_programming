@@ -1,14 +1,15 @@
 #!/usr/bin/node
-//  script that searches the second biggest integer in the list of arguments
-let a = process.argv.map(Number);
-let mx = 0;
-let sc = 0;
-for (let i = 2; i < a.length; i++) {
-  if (a[i] > mx) {
-    sc = mx;
-    mx = a[i];
-  } else if (a[i] > sc && a[i] < mx) {
-    sc = a[i];
+
+// script that finds the second biggest integer in list of arguments passed to it.
+
+if (process.argv.length < 4) {
+  console.log('0');
+} else {
+  const args = [];
+
+  for (let i = 2; i < process.argv.length; i++) {
+    args[i - 2] = process.argv[i];
   }
+  args.sort(function (a, b) { return b - a; });
+  console.log(args[1]);
 }
-console.log(sc);

@@ -1,3 +1,3 @@
 #!/bin/bash
-# Takes in a URL, sends a request to that URL
-curl -sI "$1" | awk '$1 == "Content-Length:" {print $2}'
+# script to display response size for URL passed to script
+curl -s -w %{size_download}"\n" "$1" -o /dev/null

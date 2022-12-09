@@ -1,37 +1,35 @@
 #!/usr/bin/python3
-"""Filter states by user input"""
+
+"""
+    A script that lists all states from the database hbtn_0e_0_usa
+    starting with capital letter N
+    Username, password and database names are given as user args
+"""
+
+
+import sys
 import MySQLdb
 
 
-def main():
+if __name__ == '__main__':
+    db = MySQLdb.connect(user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3],
+                         host='localhost',
+                         port=3306)
 
-    if len(argv) == 5:
-        # connect
-        db = MySQLdb.connect(host='localhost',
-                             port=3306,
-                             user=argv[1],
-                             passwd=argv[2],
-                             db=argv[3])
-        # cursor
-        c = db.cursor()
+    cursor = db.cursor()
 
-        # execute query
-        c.execute("SELECT * FROM states WHERE name = %s\
-        ORDER BY states.id ASC", (argv[4], ))
+    sql = """SELECT * FROM states
+          WHERE name = %s
+          ORDER BY id ASC"""
 
-        # fetch
-        rows = c.fetchall()
+    cursor.execute(sql, (sys.argv[4],))
 
-        # print
-        for row in rows:
-            print(row)
+    data = cursor.fetchall()
 
-        # close
-        c.close()
-        db.close()
-    else:
-        return
+    for row in data:
+        print(row)
 
-if __name__ == "__main__":
-    from sys import argv
-    main()
+    cursor.close()
+    db.close()

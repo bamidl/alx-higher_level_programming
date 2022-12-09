@@ -1,24 +1,13 @@
-$.get('https://swapi.co/api/films/?format=json', function (data) {
-  $('header').animate({
-    'font-size': '40px'
-  }).css('text-decoration', 'underline');
-
-  $.each(data.results, function () {
-    $('<li></li>')
-    .text(this.title)
-    .appendTo('UL#list_movies')
-    .css('list-style', 'none')
-    .css('position', 'relative')
-    .fadeIn(100)
-    .animate({
-      'opacity': '0.5',
-      'right': '35px',
-      'font-size': '30px',
-      'bottom': '30px'
-    }, 300);
-  });
-
-  $('footer').animate({
-    'font-size': '30px'
-  }, 500).css('text-decoration', 'underline');
+$(document).ready(function () {
+    $.ajax({
+        url: "https://swapi-api.hbtn.io/api/films/?format=json",
+        type: "GET",
+        datatype: "json",
+    })
+    .done(function( json ){
+        data = json.results;
+        for (let i = 0; i < data.length; i++) {
+            $("UL#list_movies").append("<li>" + data[i].title + "</li>");
+        }
+    })
 });

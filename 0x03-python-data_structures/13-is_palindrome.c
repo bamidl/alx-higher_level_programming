@@ -1,51 +1,31 @@
 #include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
-/*
- * is_palindrome - function with one argument
- * @head: pointer to linked list
- *
- * Description: check if value singly linked list is palindrome
- * Return: 1 if true or 0 if false
- */
+
+/**
+  * is_palindrome - checks if a singly linked list is a palindrome
+  * @head: double pointer to list.
+  *
+  *Return: 1 if palindrome, 0 if not palindrom.
+  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *ptr;
-	int count = 0, count2 = 0, half;
-	int *buf = NULL;
+	return (checkPalindrome(head, *head));
+}
 
-	if (!head)
-	      return (0);
-	if (!*head)
+/**
+  * checkPalindrome - recursive function ot check if sinly linked list
+  * is a palindrome.
+  * @headptr: double pointer to list.
+  * @tptr: pointer to list.
+  *
+  * Return: 1 or 0
+  */
+int checkPalindrome(listint_t **headptr, listint_t *tptr)
+{
+	int res;
+
+	/* base case */
+	if (tptr == NULL)
 		return (1);
-	ptr = *head;
-	while (ptr && ptr->next)
-	{
-		ptr = ptr->next;
-		count++;
-	}
-	buf = malloc(sizeof(int) * count);
-	if (!buf)
-		return (0);
-
-	ptr = *head;
-	count = 0;
-	while (ptr)
-	{
-		buf[count] = ptr->n;
-		count++;
-		ptr = ptr->next;
-	}
-	half = count / 2;
-
-	while (half)
-	{
-		if (buf[count2] != buf[count - 1])
-			return (0);
-		half--;
-		count2++;
-		count--;
-	}
-	free(buf);
-	return (1);
+	res = checkPalindrome(headptr, tptr->next) && ((*headptr)->n == tptr->n);
+	return (res);
 }

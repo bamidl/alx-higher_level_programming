@@ -1,11 +1,13 @@
 #!/usr/bin/node
-// compute && print factorial
-let n = parseInt(process.argv[2]);
-function factorial (n) {
-  if (n === 1 || isNaN(n)) {
+
+// Script to find the factorial of a number
+
+function factorial (num) {
+  if (num === 0 || isNaN(num)) {
     return 1;
+  } else {
+    return num * factorial(num - 1);
   }
-  return n * factorial(n - 1);
 }
-let final = factorial(n);
-console.log(final);
+
+console.log(factorial(parseInt(process.argv[2])));

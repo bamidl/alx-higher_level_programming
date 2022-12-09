@@ -1,54 +1,65 @@
-# 0x03. Python - Data Structures: Lists, Tuples
----
-## Description
+# PYTHON DATA STRUCTURES
 
-This project in the High Level Programming series is about:
-* What are lists and how to use them
-* What are the differences and similarities between strings and lists
-* What are the most common methods of lists and how to use them
-* How to use lists as stacks and queues
-* What are list comprehensions and how to use them
-* What are tuples and how to use them
-* When to use tuples versus lists
-* What is a sequence
-* What is tuple packing
-* What is sequence unpacking
-* What is the del statement and how to use it
+This project introduces python data structures.
 
-## Files
----
-File|Task
----|---
-0-print_list_integer.py | prints all integers of a list
-1-element_at.py | retrieves an element from a list like in C
-2-replace_in_list.py | replaces an element of a list at a specific position (like in C)
-3-print_reversed_list_integer.py | prints all integers of a list, in reverse order
-4-new_in_list.py | replaces an element in a list at a specific position without modifying the original list
-5-no_c.py | removes all characters c and C from a string
-6-print_matrix_integer.py | prints a matrix of integers
-7-add_tuple.py | adds 2 tuples
-8-multiple_returns.py | returns a tuple with the length of a string and its first character
-9-max_integer.py | finds the biggest integer of a list
-10-divisible_by_2.py | finds all multiples of 2 in a list
-11-delete_at.py | deletes the item at a specific position in a list
-12-switch.py | source code in order to switch value of a and b
-13-is_palindrome.c | Linked list palindrome - function in C that checks if a singly linked list is a palindrome
-lists.h | header file for C programs
+## 0-print_list_integer.py
 
-## Directories
----
-Directory Name | Description
----|---
-0x03-python-data_structures | all files for this project
+This file conatins a fu nction that prints all integers of a list.
+- Prototype: ``` def print_list_integer(my_list=[]): ```
+- Format: one integer per line.
 
-## More Info for Python programs
-* All Python files is PEP 8(version 1.7) formatted
-* Python Scripts - first line of every file is exactly be exactly #!/usr/bin/python3 and executable
+## 1-element_at.py
 
-## More Info for C programs
-* All C files is formatted Betty style and checked using betty-style.pl and betty-doc.pl
-* All C header files is guarded
-* Compiled using this command "gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic"
+This file contains a function that retrieves an elemnt from a list.
+- Prototype: ``` def element_at(my_list, idx): ```
+- Return:
+	* *None* if idx is negative or out of range.
+	* Number retrieved.
 
-## Author
-Heindrick Cheung
+## 2-replace_in_list.py
+
+This file contains a function that replaces an element of a list at a specific position.
+- Prototype: ``` def replace_in_list(my_list, idx, element): ```.
+- Return:
+	* Original list if idx is negative or out of range.
+	* Modified list.
+
+## 3-print_reversed_list_integer.py
+
+This file contains a function that prints all integers of a a list, in reverse order.
+- Prototype: ``` def print_reversed_list_integer(my_list=[]):
+- Format: one integer per line.
+
+## 4-new_in_list.py
+
+This file contains a function that replaces an element in a list at a specific position without modifying the original list.
+- Prototype: ``` def new_in_list(my_list, idx, element): ```.
+- Return:
+	* A copy of the origin list if idx is negative or less than zero.
+	* The modified copy of the string.
+
+## 5-no_c.py
+
+This file contains a function that removes all characters c and C froma string.
+- Prototype: ``` def no_c(my_string): ```
+- Return:
+	* New string.
+
+## 6-print_matrix_integer.py
+
+This file conatins a function that prints a matrix of integers.
+- Prototype: ``` def print_matrix_integer(matrix=[[]]): ```
+- Format: x x x
+	  x x x
+	  x x x
+
+## 7-add_tuple.py
+
+This file contains a function that adds two tuples.
+- Prototype: ``` def add_tuple(tuple_a=(), tuple_b()): ```
+- Return:
+	* A tuple with two integers such that:
+		- The first element is the sum of the first elemeent of each tuple.
+		- The Second element is the sum of the second element of each tuple.
+	* If a tuple is smaller tha 2, value 0 is used for each missing integer.
+	* If a tuple is bigger than 2, only the first two integers are used.

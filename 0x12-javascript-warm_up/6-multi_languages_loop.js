@@ -1,8 +1,10 @@
 #!/usr/bin/node
-// Print 3 lines
-const array = ['C is fun', 'Python is cool', 'Javascript is amazing'];
-let i = 0;
-while (i < 3) {
-  console.log(array[i]);
-  i++;
+
+// script to print strings using a loop
+
+let i;
+const myString = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
+
+for (i = 0; i < 3; i++) {
+  console.log(myString[i]);
 }

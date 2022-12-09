@@ -1,3 +1,3 @@
 #!/bin/bash
-# takes in a URL sends a POST request to passed URL and displays response body
-curl -sX POST -d "email=hr@codingschool.com&subject=I will always be here for PLD" "$1"
+# script that sends a DELETE request to the URL passed and display body of response
+curl -s -X "POST" "$1" -d "email=hr@holbertonschool.com&subject=I will always be here for PLD"

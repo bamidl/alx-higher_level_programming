@@ -1,17 +1,12 @@
 #!/usr/bin/python3
 """
-Read file function
+    0-read_file: read_file()
 """
 
 
 def read_file(filename=""):
-    """read a file
-    args:
-        filename: file to manipulate
-    return:
-        na
     """
-
-    with open(filename, encoding="utf-8") as f:
-        for line in f.read():
-            print(line, end="")
+        read_file reads teaxt file and prints to stdout
+    """
+    with open(filename, "r", encoding='utf-8') as a_file:
+        print("{}".format(a_file.read()), end="")

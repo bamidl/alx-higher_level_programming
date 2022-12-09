@@ -1,55 +1,106 @@
-# 0x0A. Python - Inheritance
----
-## Description
+# 0x0A-python-inheritance
 
-This project in the High Level Programming series is about:
-* What is a superclass, baseclass or parentclass
-* What is a subclass
-* How to list all attributes and methods of a class or instance
-* When can an instance have new attributes
-* How to inherit class from another
-* How to define a class with multiple base classes
-* What is the default class every class inherit from
-* How to override a method or attribute inherited from the base class
-* Which attributes or methods are available by heritage to subclasses
-* What is the purpose of inheritance
-* What are, when and how to use isinstance, issubclass, type and super built-in functions
 
-## Files
----
-File|Task
----|---
-0-lookup.py |  function that returns the list of available attributes and methods of an object
-1-my_list.py, tests/1-my_list.txt | class MyList that inherits from list and text file for testing
-2-is_same_class.py | function that returns True if the object is exactly an instance of the specified class ; otherwise False
-3-is_kind_of_class.py | function that returns True if the object is an instance of, or if the object is an instance of a class that inherited from, the specified class ; otherwise False
-4-inherits_from.py | function that returns True if the object is an instance of a class that inherited (directly or indirectly) from the specified class ; otherwise False
-5-base_geometry.py | an empty class BaseGeometry
-6-base_geometry.py | class BaseGeometry (based on 5-base_geometry.py)
-7-base_geometry.py, tests/7-base_geometry.txt | class BaseGeometry (based on 6-base_geometry.py) and test file
-8-rectangle.py | a class Rectangle that inherits from BaseGeometry (7-base_geometry.py)
-9-rectangle.py | a class Rectangle that inherits from BaseGeometry (7-base_geometry.py)
-10-square.py | a class Square that inherits from Rectangle (9-rectangle.py)
-11-square.py | a class Square that inherits from Rectangle (9-rectangle.py). (task based on 10-square.py)
-100-my_int.py | a class MyInt that inherits from int
-101-add_attribute.py | function that adds a new attribute to an object if it’s possible
+## 0-lookup.py
 
-## Directories
----
-Directory Name | Description
----|---
-0x0A-python-inheritance | Main Python files
-tests | Main test files for doctest
+A function that returns the list of availbale attributes and methods of an object.
 
-## More Info for Python programs
-* All Python files is PEP 8(version 1.7) formatted
-* All modules, classes and functions(inside and outside a class) have documentations
-* Python Scripts - first line of every file is exactly be exactly #!/usr/bin/python3 and executable
+- Prototype: ``` def lookup(obj): ```.
+- Return: a list object.
 
-## Python Test Cases
-* All tests should be executed by using this command: python3 -m doctest ./tests/*
-* All test files is inside a folder tests
-* All test files is text files (extension: .txt)
+## 1-my_list.py
 
-## Author
-Heindrick Cheung
+A class MyList tat inherits from list.
+
+- Public instance method: ``` def print_sorted(self): ``` that prints the list, but sorted (ascending sort).
+- Assumption: all elements of list aree of type ``` int ```.
+
+## 2-is_same_class.py
+
+A function that returns ``` True ``` if the object is *exactly* an instance of the specified class, otherwise ``` False ```.
+
+- Prototype: ``` def is_same_class(obj, a_class):
+
+## 3-is_kind_of_class.py
+
+A function that returns ``` True ``` if teh object is an instance of, or if the object is an instance of a class that inherited from the specified class. Otherwise return ``` False ```.
+
+- Prototype: ``` def is_kind_of_class(obj, a_class): ```
+
+## 4-inherits_from.py
+
+A function that returns ``` True ``` if the object is an instance of a class that inherited (directly or indirectly) from the specified class. Otherwise ``` False ```.
+
+- Prototype: ``` def inherits_from(obj, a_class): ```
+
+## 5-base_geometry.py
+
+An empty class ``` BaseGeometry ```.
+
+## 6-base_geometry.py
+
+A class ``` BaseGeometry ``` (based on 5-base_geometry.py).
+
+- Public instance method: ``` def area(self): ``` raises an Exception with the message ``` area() is not implemented ```.
+
+## 7-base_geometry.py
+
+A class BaseGeometry (based on 6-base_geometry.py).
+
+- Public instance method: ``` def area(self): ``` raises an Exception with the message ``` are    a() is not implemented ```.
+- Public instance method: ```def integer_validator(self, name, value):``` that validates ``` value ```:
+	* Assumption: ``` name ``` is always a string.
+	* If ``` value ``` is not an integer: ``` TypeError ``` with te message ``` <name> must be an integer ``` is raised.
+	* If ``` value ``` is less or equal to 0: ``` ValueError ``` exception with the message ``` <name> must be greater than 0 ```.
+
+## 8-rectangle.py
+
+A class ``` Rectangle ``` that inherits from ``` BaseGeometry ``` (7-base_gometry.py)
+
+- Instantiation with ``` width ``` and ``` height ```: ``` def __init__(self, width, height): ```:
+	* ``` width ``` and ``` height ``` must be private. No getter or setter.
+	* ``` width ``` and ``` height ``` must be positive integers, validated by integer_validator.
+
+
+## 9-rectangle.py
+
+A class ``` Rectangle ``` that inherits from ``` BaseGeometry ``` (7-base_gometry.py)
+
+- Instantiation with ``` width ``` and ``` height ```: ``` def __init__(self, width, height):     ```:
+         * ``` width ``` and ``` height ``` must be private. No getter or setter.
+	 * ``` width ``` and ``` height ``` must be positive integers, validated by integer_validator.
+- the ``` area() ``` method has been implemented.
+- ``` print() ``` should print, and ``` str() ``` return the following rectangle description: ``` [Rectangle] <width>/<height> ```.
+
+
+## 10-square.py
+
+A class ``` Square ``` that inherits from ``` Rectangle ``` (9-rectangle.py):
+
+- Instantiation with ``` size: def __init__(self, size): ```
+	* ``` size ``` must be private. No getter or setter.
+	* ``` size ``` must be a positive integer, validated by ``` integer validator ```.
+- the ``` area() ``` method is implemented.
+
+## 11-square.py
+
+A class ``` Square ``` that inherits from ``` Rectangle ``` (9-rectangle.py):
+
+- Instantiation with ``` size: def __init__(self, size): ```
+	* ``` size ``` must be private. No getter or setter.
+	* ``` size ``` must be a positive integer, validated by ``` integer validator ```.
+- the ``` area() ``` method is implemented.
+- ``` print() ``` should print, and ``` str() ``` return the following rectangle description:``` [Square] <width>/<height> ```.
+
+## 100-my_int.py
+
+A class ``` MyInt ``` that inherits from ``` int ```:
+
+- ``` MyInt ``` has ``` ==``` and ``` != ``` inverted
+
+## 101-add_attribute.py
+
+A function that adds a new attribute to an object if its possible.
+
+- A ``` TypeError ``` exception with the message ``` can't add new attribute ``` is raised when the object can't have the new attribute.
+

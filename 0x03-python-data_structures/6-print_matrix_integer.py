@@ -1,10 +1,14 @@
 #!/usr/bin/python3
+
+
 def print_matrix_integer(matrix=[[]]):
-    for row in range(len(matrix)):
-        count = 0
-        for val in matrix[row]:
-            print("{:d}".format(val), end="")
-            if count < len(matrix[row]) - 1:
-                print(end=" ")
-            count += 1
+    if matrix:
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[i])):
+                if j != len(matrix[i]) - 1:
+                    print("{:d}".format(matrix[i][j]), end=" ")
+                else:
+                    print("{:d}".format(matrix[i][j]))
+    else:
         print()
+

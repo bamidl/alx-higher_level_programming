@@ -1,8 +1,11 @@
 #!/usr/bin/node
-// prints My number: <first argument converted in integer> if the first argument can be converted to an integer
-const number = parseInt(process.argv[2]);
-if (!number) {
+
+// Script to print ints passed as arguments to the script.
+
+const myArg = process.argv[2];
+
+if (isNaN(Number(myArg))) {
   console.log('Not a number');
 } else {
-  console.log('My number:', number);
+  console.log('My number: ' + myArg);
 }

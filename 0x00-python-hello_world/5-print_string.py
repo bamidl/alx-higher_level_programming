@@ -1,3 +1,4 @@
 #!/usr/bin/python3
-str = "Coding School"
-print("{0:s}{0:s}{0:s}\n{1:s}".format(str, str[:9]))
+str = "Holberton School"
+print("{:s}{:s}{:s}".format(str, str, str))
+print("{:.9s}".format(str))

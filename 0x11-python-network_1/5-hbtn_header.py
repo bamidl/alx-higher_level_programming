@@ -1,15 +1,12 @@
 #!/usr/bin/python3
 """
-Python script for requests
+    Script that takes in a URL, sends a request to the URL and dsiplays
+    value of the variable X-Request-Id
 """
+import requests
+import sys
 
 
 if __name__ == "__main__":
-    import requests
-    from sys import argv
-
-    try:
-        req = requests.get(argv[1])
-        print(req.headers['X-Request-Id'])
-    except KeyError:
-        pass
+    r = requests.get(sys.argv[1])
+    print("{}".format(r.headers['X-Request-Id']))

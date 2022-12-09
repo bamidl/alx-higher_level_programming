@@ -1,48 +1,37 @@
-# 0x0C. Python - Almost a circle
----
-## Description
-
-This project in the High Level Programming series is about:
-* Unit testing and how to implement it in a large project
-* How to serialize and deserialize a Class
-* How to write and read a JSON file
-* What is *args and how to use it
-* What is **kwargs and how to use it
-* How to handle named arguments in a function
-
-## Files
----
-File|Task
----|---
-models/base.py | A class called `Base` that other classes can inherit from
-models/rectangle.py | A class called `Rectangle` that inherits from `Base`
-models/square.py | A class called `Square` that inherits from `Rectangle`
-models/\_\_init\_\_.py | Blank init file that makes the directory a module
-tests/\_\_init\_\_.py | Blank init file that makes the directory a module
-tests/test_models/\_\_init\_\_.py | Blank init file that makes the directory a module
-tests/test_models/test_base.py | Contains test cases for `base.py`
-tests/test_models/test_rectangle.py | Contains test cases for `rectangle.py`
-tests/test_models/test_square.py | Contains test cases for `square.py`
+# 0x0C-python-almost_a_circle
 
 
-## Directories
----
-Directory Name | Description
----|---
-main/ | Main files for all functions
-tests/ | Contains a directory for testing models
-tests/test_models/ | Contains all files that are used to test the models
-models/ | Contains all the model files
+## models/
 
-## More Info for Python programs
-* All Python files is PEP 8(version 1.7) formatted
-* All modules, classes and functions(inside and outside a class) have documentations
-* Python Scripts - first line of every file is exactly be exactly #!/usr/bin/python3 and executable
+### base.py
+This file contains a class ``` Base ```. It is the '*base*' of all other classes in this project. Main goal is to manage ``` id ``` attribute to avoid code duplication.
 
-## Python Unittesting
-* All test files and folders should start with test_
-* All test files can be executed by using this command: python3 -m unittest discover tests
-* All test files in located in /tests folder
+### rectangle.py
+Contains the rectangle class that implements the base class. 
 
-## Author
-Heindrick Cheung
+### square.py
+This file contains the a class Square that implements the class Rectangle.
+
+###  __init__.py
+This makes the folder a python module.
+
+## tests/
+This folder contains the test files and folders of this project.
+
+### test_models/
+Test folder contains unittests for the model folder.
+
+#### test_base.py
+Test case  for ```base.py```.
+
+#### test_rectangle.py
+Test case for ```rectangle.py```.
+
+#### test_square.py
+Test case for ```square.py```.
+
+## *Resources*
+
+* [Args and Kwargs in Python](https://alx-intranet.hbtn.io/rltoken/7gc6UzxSL81HcuAwklUbuQ)
+* [unittest module](https://alx-intranet.hbtn.io/rltoken/soictNXCPE18ASL3INoeew)
+* [Python Documentation](https://docs.python.org/)

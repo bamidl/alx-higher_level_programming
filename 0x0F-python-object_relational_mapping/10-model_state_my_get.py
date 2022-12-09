@@ -1,29 +1,37 @@
 #!/usr/bin/python3
-# prints the State object with name input
+"""
+    A script that prints the State object with the name passed as an argument
+    from hbtn_0e_6_usa
+    Username, password, dbname and name to search
+    will be passed as arguments to the script.
+"""
 
 
-if __name__ == "__main__":
-    from model_state import Base, State
-    from sys import argv
-    from sqlalchemy.engine.url import URL
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import Session
+import sys
+from model_state import Base, State
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 
-    db = {'drivername': 'mysql+mysqldb',
-          'host': 'localhost',
-          'port': '3306',
-          'username': argv[1],
-          'password': argv[2],
-          'database': argv[3]}
+if __name__ == '__main__':
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
+                           sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
 
-    url = URL(**db)
-    engine = create_engine(url, pool_pre_ping=True)
+    Session = sessionmaker(bind=engine)
+
     Base.metadata.create_all(engine)
-    session = Session(engine)
 
-    sobj = (argv[4], )
-    try:
-        state = session.query(State).filter(State.name == sobj).one_or_none()
-        print("{}".format(state.id))
-    except:
+    # create a session
+    session = Session()
+
+    # extract first state
+    states = session.query(State) \
+                    .filter(State.name == sys.argv[4]).one_or_none()
+
+    # print state.id
+    if states is None:
         print("Not found")
+    else:
+        print(states.id)
+
+    session.close()

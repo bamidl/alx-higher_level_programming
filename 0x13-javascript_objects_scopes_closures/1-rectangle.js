@@ -1,5 +1,7 @@
 #!/usr/bin/node
-// define and export class Rectangle
+
+// script that creates a class.
+
 module.exports = class Rectangle {
   constructor (w, h) {
     this.width = w;

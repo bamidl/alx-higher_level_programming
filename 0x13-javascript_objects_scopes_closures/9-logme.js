@@ -1,10 +1,16 @@
 #!/usr/bin/node
-// prints the number of arguments already printed and the new argument value
-let num = 0;
-exports.logMe = function (item) {
-  function print () {
-    console.log(num + ': ' + item);
-    num += 1;
+
+// script that prints the number of arguments already prnted and the new argument value
+
+function * generator () {
+  let idx = 0;
+  while (true) {
+    yield idx++;
   }
-  print();
+}
+
+const gen = generator();
+
+exports.logMe = function (item) {
+  console.log(gen.next().value + ': ' + item);
 };

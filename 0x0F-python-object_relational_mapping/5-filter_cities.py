@@ -1,34 +1,35 @@
 #!/usr/bin/python3
-'''script to list all cities with user inputted state'''
 
-if __name__ == "__main__":
-    from sys import argv
-    import MySQLdb
+"""
+    A script that lists all cities in a state from the database hbtn_0e_0_usa
+    Username, password and database name and state are given as user args
+"""
 
-    # connect
-    db = MySQLdb.connect(host='localhost',
-                         port=3306,
-                         user=argv[1],
-                         passwd=argv[2],
-                         db=argv[3]
-                         )
-    # cursor
-    c = db.cursor()
-    # execute
-    state = (argv[4], )
-    cmd = "SELECT cities.name FROM cities JOIN states ON\
-    cities.state_id = states.id AND states.name = %s ORDER BY cities.id ASC"
 
-    c.execute(cmd, state)
+import sys
+import MySQLdb
 
-    # fetch
-    rows = c.fetchall()
 
-    # print
-    ll = [x[0] for x in rows]
-    together = ", ".join(ll)
-    print(together)
+if __name__ == '__main__':
+    db = MySQLdb.connect(user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3],
+                         host='localhost',
+                         port=3306)
 
-    # close
-    c.close()
+    cursor = db.cursor()
+
+    sql = """SELECT cities.name
+          FROM states
+          INNER JOIN cities ON states.id = cities.state_id
+          WHERE states.name = %s
+          ORDER BY cities.id ASC"""
+
+    cursor.execute(sql, (sys.argv[4],))
+
+    data = cursor.fetchall()
+
+    print(", ".join([city[0] for city in data]))
+
+    cursor.close()
     db.close()
